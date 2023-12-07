@@ -1,0 +1,29 @@
+{
+  "name": "amazon",
+  "version": "1.0.0",
+  "description": "test e2e cypress amazon",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrijeshChandra7/amazon.git"
+  },
+  "keywords": [
+    "test",
+    "e2e",
+    "cypress",
+    "amazon"
+  ],
+  "author": "Brijesh Chandra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrijeshChandra7/amazon/issues"
+  },
+  "homepage": "https://github.com/BrijeshChandra7/amazon#readme",
+  "dependencies": {
+    "cypress": "^13.6.0",
+    "cypress-real-events": "^1.11.0"
+  }
+}
