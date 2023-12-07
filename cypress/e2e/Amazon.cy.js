@@ -28,6 +28,9 @@ describe("Amazon", () => {
       AllHamburger.verifyMenuIsPresent("trending");
       AllHamburger.verifyMenuIsPresent("Best Sellers");
       AllHamburger.clickOnHamburgerMenu("Best Sellers");
+      AllHamburger.verifyNewPageText("Amazon Bestsellers");
+      AllHamburger.clickAllHamburger();
+      AllHamburger.closeMenu();
     });
   });
 });
