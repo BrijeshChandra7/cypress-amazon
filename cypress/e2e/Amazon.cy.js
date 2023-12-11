@@ -11,7 +11,7 @@ describe("Amazon", () => {
 
   it("enter product", () => {
     cy.get("@Data").then((data) => {
-      SearchProduct.enterProduct(data.Product2);
+      SearchProduct.enterProduct(data.Product1);
       SearchProduct.clickOnSearch();
       SearchProduct.verifyResultPage("Results");
       SearchProduct.verifyColorChange();
