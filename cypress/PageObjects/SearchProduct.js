@@ -8,6 +8,7 @@ class searchProduct {
   ProductAvailability = "span.a-size-medium.a-color-success";
   btnAddToCart = "input#add-to-cart-button";
   btnProceedToCheckout = 'input[aria-labelledby="attach-sidesheet-checkout-button-announce"]';
+  cart = 'span#nav-cart-count';
 
   enterProduct(product) {
     cy.assertElementVisibility(this.txtBoxSearchProd);
@@ -52,6 +53,10 @@ class searchProduct {
 
   clickOnProceedToCheckout() {
     cy.clickElement(this.btnProceedToCheckout);
+  }
+
+  verifyCartItems(items) {
+    cy.verifyElementText(this.cart, items);
   }
 }
 export default new searchProduct();

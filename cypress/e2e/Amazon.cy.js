@@ -9,7 +9,7 @@ describe("Amazon", () => {
     cy.fixture("Amazon.json").as("Data");
   });
 
-  it.skip("enter product", () => {
+  it("enter product", () => {
     cy.get("@Data").then((data) => {
       SearchProduct.enterProduct(data.Product2);
       SearchProduct.clickOnSearch();
@@ -31,6 +31,7 @@ describe("Amazon", () => {
       AllHamburger.verifyNewPageText("Amazon Bestsellers");
       AllHamburger.clickAllHamburger();
       AllHamburger.closeMenu();
+      SearchProduct.verifyCartItems(0);
     });
   });
 });
