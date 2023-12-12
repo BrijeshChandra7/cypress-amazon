@@ -1,5 +1,7 @@
 import SearchProduct from "../PageObjects/SearchProduct";
 import AllHamburger from "../PageObjects/AllHamburger";
+import Homepage from "../PageObjects/Homepage";
+
 describe("Amazon", () => {
   beforeEach("Enter Amazon", () => {
     cy.visit("/");
@@ -16,7 +18,7 @@ describe("Amazon", () => {
       SearchProduct.verifyResultPage("Results");
       SearchProduct.verifyColorChange();
       SearchProduct.clickOnProduct();
-      //SearchProduct.verifyStockAvailability(' In stock ');
+      SearchProduct.verifyStockAvailability(' In stock ');
       SearchProduct.clickOnAddToCart();
       SearchProduct.clickOnProceedToCheckout();
     });
@@ -32,6 +34,28 @@ describe("Amazon", () => {
       AllHamburger.clickAllHamburger();
       AllHamburger.closeMenu();
       SearchProduct.verifyCartItems(0);
+    });
+  });
+
+  it("Add to cart", () => {
+    cy.get("@Data").then((data) => {
+      SearchProduct.enterProduct(data.Product1);
+      SearchProduct.clickOnSearch();
+      SearchProduct.verifyResultPage("Results");
+      SearchProduct.verifyColorChange();
+      SearchProduct.clickOnProduct();
+      SearchProduct.verifyStockAvailability(' In stock ');
+      SearchProduct.clickOnAddToCart();
+      SearchProduct.closeCartPanel();
+      SearchProduct.verifyCartItems(1);
+      
+    });
+  });
+
+  it("Homepage Titles", () => {
+    cy.get("@Data").then((data) => {
+      Homepage.verifyHomepageTitles('Today’s Deals');
+      
     });
   });
 });
