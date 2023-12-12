@@ -33,7 +33,7 @@ Cypress.Commands.add("login", (username, password) => {
     });
   });
   Cypress.Commands.add("clickElement", (selector) => {
-    cy.get(selector).click({force: true});
+    cy.get(selector).click({force: true, multiple:true});
   });
   
   Cypress.Commands.add("enterText", (selector, text) => {
