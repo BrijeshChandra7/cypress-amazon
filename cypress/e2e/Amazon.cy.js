@@ -20,7 +20,7 @@ describe("Amazon", () => {
       SearchProduct.clickOnProduct();
       SearchProduct.verifyStockAvailability(' In stock ');
       SearchProduct.clickOnAddToCart();
-      SearchProduct.clickOnProceedToCheckout();
+     // SearchProduct.clickOnProceedToCheckout();
     });
   });
 

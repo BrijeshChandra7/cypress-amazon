@@ -50,6 +50,7 @@ class searchProduct {
 
   clickOnAddToCart() {
     cy.clickElement(this.btnAddToCart);
+    cy.wait(3000);
   }
 
   clickOnProceedToCheckout() {
@@ -57,11 +58,12 @@ class searchProduct {
   }
 
   verifyCartItems(items) {
+    cy.wait(4000);
     cy.verifyElementText(this.cart, items);
   }
 
   closeCartPanel() {
-    cy.wait(10000);
+    cy.wait(5000);
     cy.get(this.btnCloseCart).first().click();
   }
 }
