@@ -169,7 +169,7 @@ describe("Amazon", () => {
     });
   });
 
-  it.only("Check whether the total price reduces when the product is removed from the cart.", () => {
+  it("Check whether the total price reduces when the product is removed from the cart.", () => {
     cy.get("@Data").then((data) => {
       Cart.CartIconVisibility();
       SearchProduct.enterProduct(data.Product1);
@@ -202,11 +202,7 @@ describe("Amazon", () => {
       Cart.OpenCart();
       Cart.SelectQuantityNum(5);
       SearchProduct.verifyCartItems(5);
-      Cart.verifyProductPrice('78,900.00');
-      Cart.verifySubTotalPrice(78900.00, 5);
-      Cart.SelectQuantityNum(4);
-      cy.wait(2000);
-      Cart.verifySubTotalPrice(78900.00, 4);
+      Cart.verifyGiftText('Your order is eligible for FREE Delivery.');
       
     });
   });

@@ -7,6 +7,7 @@ class cart {
     btnProccedToBuy = 'input[data-feature-id="proceed-to-checkout-action"]';
     txtPrice = '.a-section > .a-size-medium';
     txtSubTotalPrice = '#sc-subtotal-amount-buybox > .a-size-medium';
+    txtGift = '.a-alert-content > :nth-child(1) > b';
  
 
     CartIconVisibility() {
@@ -51,11 +52,12 @@ class cart {
                 cy.log('failed');
             }
             expect(numberValue).to.be.equal(price * qty);
-
-            // Compare the initial and updated total prices
-   
         
         });
-}
+    }
+    
+    verifyGiftText(text) {
+        cy.verifyElementText(this.txtGift, text);
+    }
 }
 export default new cart();
