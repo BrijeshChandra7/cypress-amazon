@@ -10,6 +10,7 @@ class searchProduct {
   btnProceedToCheckout = 'input[aria-labelledby="attach-sidesheet-checkout-button-announce"]';
   cart = 'span#nav-cart-count';
   btnCloseCart = 'a#attach-close_sideSheet-link';
+ 
 
   enterProduct(product) {
     cy.assertElementVisibility(this.txtBoxSearchProd);
@@ -65,6 +66,10 @@ class searchProduct {
   closeCartPanel() {
     cy.wait(5000);
     cy.get(this.btnCloseCart).first().click();
+  }
+
+  verifyProductPrice(price) {
+    cy.verifyElementText(this.txtPrice, price);
   }
 }
 export default new searchProduct();

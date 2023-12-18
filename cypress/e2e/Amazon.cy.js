@@ -117,7 +117,7 @@ describe("Amazon", () => {
     });
   });
 
-  it.only("Check whether the page redirects to the product detail page when clicking on the product in the shopping cart.", () => {
+  it("Check whether the page redirects to the product detail page when clicking on the product in the shopping cart.", () => {
     cy.get("@Data").then((data) => {
       Cart.CartIconVisibility();
       SearchProduct.enterProduct(data.Product1);
@@ -133,5 +133,87 @@ describe("Amazon", () => {
       
     });
   });
-  
+
+  it("Check whether the user is redirected to the checkout page after clicking on the checkout button.", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product1);
+      SearchProduct.clickOnSearch();
+      SearchProduct.clickOnProduct();
+      SearchProduct.clickOnAddToCart();
+      //Cart.CloseCartBox();
+      SearchProduct.verifyCartItems(1);
+      Cart.OpenCart();
+      Cart.SelectQuantityNum(5);
+      SearchProduct.verifyCartItems(5);
+      Cart.ClickOnProceedToBuy();
+      
+    });
+  });
+
+  it("Check whether the total price is added when the product is added to the cart.", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product1);
+      SearchProduct.clickOnSearch();
+      SearchProduct.clickOnProduct();
+      SearchProduct.clickOnAddToCart();
+      //Cart.CloseCartBox();
+      SearchProduct.verifyCartItems(1);
+      Cart.OpenCart();
+      Cart.SelectQuantityNum(5);
+      SearchProduct.verifyCartItems(5);
+      Cart.verifyProductPrice('78,900.00');
+      Cart.verifySubTotalPrice(78900.00, 5);
+      
+    });
+  });
+
+  it.only("Check whether the total price reduces when the product is removed from the cart.", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product1);
+      SearchProduct.clickOnSearch();
+      SearchProduct.clickOnProduct();
+      SearchProduct.clickOnAddToCart();
+      //Cart.CloseCartBox();
+      SearchProduct.verifyCartItems(1);
+      Cart.OpenCart();
+      Cart.SelectQuantityNum(5);
+      SearchProduct.verifyCartItems(5);
+      Cart.verifyProductPrice('78,900.00');
+      Cart.verifySubTotalPrice(78900.00, 5);
+      Cart.SelectQuantityNum(4);
+      cy.wait(2000);
+      Cart.verifySubTotalPrice(78900.00, 4);
+      
+    });
+  });
+
+  it.only("Check whether the total price reduces when the product is removed from the cart.", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product1);
+      SearchProduct.clickOnSearch();
+      SearchProduct.clickOnProduct();
+      SearchProduct.clickOnAddToCart();
+      //Cart.CloseCartBox();
+      SearchProduct.verifyCartItems(1);
+      Cart.OpenCart();
+      Cart.SelectQuantityNum(5);
+      SearchProduct.verifyCartItems(5);
+      Cart.verifyProductPrice('78,900.00');
+      Cart.verifySubTotalPrice(78900.00, 5);
+      Cart.SelectQuantityNum(4);
+      cy.wait(2000);
+      Cart.verifySubTotalPrice(78900.00, 4);
+      
+    });
+  });
+
+
 });
+
+
+  
+
