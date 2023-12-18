@@ -50,7 +50,7 @@ class searchProduct {
 
   clickOnAddToCart() {
     cy.clickElement(this.btnAddToCart);
-    cy.wait(3000);
+    cy.wait(10000);
   }
 
   clickOnProceedToCheckout() {
