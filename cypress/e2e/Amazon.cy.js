@@ -8,7 +8,7 @@ describe("Amazon", () => {
     cy.clearAllCookies;
     cy.clearAllLocalStorage;
     cy.visit("/");
-    Cypress.on('uncaught:exception', (err, runnable) => {
+    Cypress.on("uncaught:exception", (err, runnable) => {
       return false;
     });
     cy.fixture("Amazon.json").as("Data");
@@ -21,9 +21,9 @@ describe("Amazon", () => {
       SearchProduct.verifyResultPage("Results");
       SearchProduct.verifyColorChange();
       SearchProduct.clickOnProduct();
-      SearchProduct.verifyStockAvailability(' In stock ');
+      SearchProduct.verifyStockAvailability(" In stock ");
       SearchProduct.clickOnAddToCart();
-     // SearchProduct.clickOnProceedToCheckout();
+      // SearchProduct.clickOnProceedToCheckout();
     });
   });
 
@@ -47,24 +47,21 @@ describe("Amazon", () => {
       SearchProduct.verifyResultPage("Results");
       SearchProduct.verifyColorChange();
       SearchProduct.clickOnProduct();
-      SearchProduct.verifyStockAvailability(' In stock ');
+      SearchProduct.verifyStockAvailability(" In stock ");
       SearchProduct.clickOnAddToCart();
       SearchProduct.verifyCartItems(1);
-      
     });
   });
 
   it("Homepage Titles", () => {
     cy.get("@Data").then((data) => {
-      Homepage.verifyHomepageTitles('Today’s Deals');
-      
+      Homepage.verifyHomepageTitles("Today’s Deals");
     });
   });
 
   it("Check whether the Shopping Cart button is seen on the product display page.", () => {
     cy.get("@Data").then((data) => {
       Cart.CartIconVisibility();
-
     });
   });
 
@@ -130,7 +127,6 @@ describe("Amazon", () => {
       Cart.SelectQuantityNum(5);
       SearchProduct.verifyCartItems(5);
       Cart.OpenProductDtails();
-      
     });
   });
 
@@ -147,7 +143,6 @@ describe("Amazon", () => {
       Cart.SelectQuantityNum(5);
       SearchProduct.verifyCartItems(5);
       Cart.ClickOnProceedToBuy();
-      
     });
   });
 
@@ -163,9 +158,8 @@ describe("Amazon", () => {
       Cart.OpenCart();
       Cart.SelectQuantityNum(5);
       SearchProduct.verifyCartItems(5);
-      Cart.verifyProductPrice('78,900.00');
-      Cart.verifySubTotalPrice(78900.00, 5);
-      
+      Cart.verifyProductPrice("78,900.00");
+      Cart.verifySubTotalPrice(78900.0, 5);
     });
   });
 
@@ -181,16 +175,15 @@ describe("Amazon", () => {
       Cart.OpenCart();
       Cart.SelectQuantityNum(5);
       SearchProduct.verifyCartItems(5);
-      Cart.verifyProductPrice('78,900.00');
-      Cart.verifySubTotalPrice(78900.00, 5);
+      Cart.verifyProductPrice("78,900.00");
+      Cart.verifySubTotalPrice(78900.0, 5);
       Cart.SelectQuantityNum(4);
       cy.wait(2000);
-      Cart.verifySubTotalPrice(78900.00, 4);
-      
+      Cart.verifySubTotalPrice(78900.0, 4);
     });
   });
 
-  it.only("Check whether the total price reduces when the product is removed from the cart.", () => {
+  it("Check whether the total price reduces when the product is removed from the cart.", () => {
     cy.get("@Data").then((data) => {
       Cart.CartIconVisibility();
       SearchProduct.enterProduct(data.Product1);
@@ -202,14 +195,25 @@ describe("Amazon", () => {
       Cart.OpenCart();
       Cart.SelectQuantityNum(5);
       SearchProduct.verifyCartItems(5);
-      Cart.verifyGiftText('Your order is eligible for FREE Delivery.');
-      
+      Cart.clickOnDelete();
+      Cart.verifyGiftText("Your order is eligible for FREE Delivery.");
     });
   });
 
-
+  it.only("Check whether the user is able to delete the product from the cart.", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product1);
+      SearchProduct.clickOnSearch();
+      SearchProduct.clickOnProduct();
+      SearchProduct.clickOnAddToCart();
+      //Cart.CloseCartBox();
+      SearchProduct.verifyCartItems(1);
+      Cart.OpenCart();
+      Cart.SelectQuantityNum(5);
+      SearchProduct.verifyCartItems(5);
+      Cart.clickOnDelete();
+      Cart.verifyEmptyCartText("Your Amazon Cart is empty.");
+    });
+  });
 });
-
-
-  
-

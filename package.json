@@ -24,6 +24,7 @@
   "homepage": "https://github.com/BrijeshChandra7/amazon#readme",
   "dependencies": {
     "cypress": "^13.6.0",
+    "cypress-mochawesome-reporter": "^3.7.0",
     "cypress-real-events": "^1.11.0"
   }
 }
