@@ -200,7 +200,7 @@ describe("Amazon", () => {
     });
   });
 
-  it.only("Check whether the user is able to delete the product from the cart.", () => {
+  it("Check whether the user is able to delete the product from the cart.", () => {
     cy.get("@Data").then((data) => {
       Cart.CartIconVisibility();
       SearchProduct.enterProduct(data.Product1);
@@ -214,6 +214,123 @@ describe("Amazon", () => {
       SearchProduct.verifyCartItems(5);
       Cart.clickOnDelete();
       Cart.verifyEmptyCartText("Your Amazon Cart is empty.");
+    });
+  });
+
+  it("Check whether the item is added to the cart when clicking on the button.", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product1);
+      SearchProduct.clickOnSearch();
+      SearchProduct.clickOnProduct();
+      SearchProduct.clickOnAddToCart();
+      SearchProduct.verifyCartItems(1);
+      Cart.OpenCart();
+      Cart.SelectQuantityNum(5);
+      SearchProduct.verifyCartItems(5);
+    });
+  });
+
+  it("Check whether the user can add a product as gift.", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product1);
+      SearchProduct.clickOnSearch();
+      SearchProduct.clickOnProduct();
+      Cart.checkAsGift();
+      SearchProduct.clickOnAddToCart();
+      SearchProduct.verifyCartItems(1);
+      Cart.OpenCart();
+      SearchProduct.verifyCartItems(1);
+      Cart.verifyAsGift();
+    });
+  });
+
+  it("Check whether the shopping cart page has options for edit, delete, save etc", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product1);
+      SearchProduct.clickOnSearch();
+      SearchProduct.clickOnProduct();
+      SearchProduct.clickOnAddToCart();
+      SearchProduct.verifyCartItems(1);
+      Cart.OpenCart();
+      SearchProduct.verifyCartItems(1);
+      Cart.verifyOptionsInCart("Delete");
+      Cart.verifyOptionsInCart("Share");
+      Cart.verifyOptionsInCart("Qty:1");
+    });
+  });
+
+  it("Verify that search field accepts alphabets, numbers or symbols.", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product2);
+      SearchProduct.enterProduct(data.Product3);
+      SearchProduct.enterProduct(data.Product4);
+    });
+  });
+
+  it("Verify that sorting options should be present on search results page.", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product2);
+      SearchProduct.clickOnSearch();
+      SearchProduct.verifySortPresent();
+    });
+  });
+
+  it("Verify that sorting option is clickable", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product2);
+      SearchProduct.clickOnSearch();
+      SearchProduct.verifySortPresent();
+      SearchProduct.clickSort();
+    });
+  });
+
+  it("Verify that user is able to select sorting option", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product2);
+      SearchProduct.clickOnSearch();
+      SearchProduct.verifySortPresent();
+      SearchProduct.clickSort();
+      SearchProduct.selectSort("Price: High to Low");
+    });
+  });
+
+  it("Verify that the number of search results displayed on one page.", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product2);
+      SearchProduct.clickOnSearch();
+      SearchProduct.verifyToatalSearchPages("1-16");
+    });
+  });
+
+  it("Verify that there should be navigation button(Next) for navigation to pages.", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product2);
+      SearchProduct.clickOnSearch();
+      SearchProduct.verifyToatalSearchPages("1-16");
+      SearchProduct.clickOnNextPage();
+      SearchProduct.verifyToatalSearchPages("17-32");
+    });
+  });
+
+  it.only("Verify that there should be navigation button(Previous) for navigation to pages.", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.enterProduct(data.Product2);
+      SearchProduct.clickOnSearch();
+      SearchProduct.verifyToatalSearchPages("1-16");
+      SearchProduct.clickOnNextPage();
+      SearchProduct.verifyToatalSearchPages("17-32");
+      SearchProduct.clickOnPrevPage();
+      SearchProduct.verifyToatalSearchPages("1-16");
     });
   });
 });

@@ -7,14 +7,24 @@ class searchProduct {
     "a.a-link-normal.s-underline-text.s-underline-link-text.s-link-style.a-text-normal";
   ProductAvailability = "span.a-size-medium.a-color-success";
   btnAddToCart = "input#add-to-cart-button";
-  btnProceedToCheckout = 'input[aria-labelledby="attach-sidesheet-checkout-button-announce"]';
-  cart = 'span#nav-cart-count';
-  btnCloseCart = 'a#attach-close_sideSheet-link';
- 
+  btnProceedToCheckout =
+    'input[aria-labelledby="attach-sidesheet-checkout-button-announce"]';
+  cart = "span#nav-cart-count";
+  btnCloseCart = "a#attach-close_sideSheet-link";
+  DropSort = "span.a-dropdown-label";
+  SortMenu = 'ul[role="listbox"]';
+  txtTotalResultsPages =
+    "div.a-section.a-spacing-small.a-spacing-top-small span";
+  btnNextPage = 'a[aria-label*="Go to next page"]';
+  btnPrevPage = 'a[aria-label*="Go to previous page"]';
 
   enterProduct(product) {
     cy.assertElementVisibility(this.txtBoxSearchProd);
     cy.enterText(this.txtBoxSearchProd, product);
+  }
+
+  verifySearchTextEntered(prod) {
+    cy.verifyElementText(this.txtBoxSearchProd, prod);
   }
 
   clickOnSearch() {
@@ -70,6 +80,32 @@ class searchProduct {
 
   verifyProductPrice(price) {
     cy.verifyElementText(this.txtPrice, price);
+  }
+
+  verifySortPresent() {
+    cy.get(this.DropSort).contains("Sort by:").should("be.visible");
+  }
+
+  clickSort() {
+    cy.get(this.DropSort).contains("Sort by:").click();
+  }
+
+  selectSort(sort) {
+    cy.get(this.SortMenu).children().contains(sort).click();
+  }
+
+  verifyToatalSearchPages(text) {
+    cy.get(this.txtTotalResultsPages).first().should("contain.text", text);
+  }
+
+  clickOnNextPage() {
+    cy.assertElementVisibility(this.btnNextPage);
+    cy.clickElement(this.btnNextPage);
+  }
+
+  clickOnPrevPage() {
+    cy.assertElementVisibility(this.btnPrevPage);
+    cy.clickElement(this.btnPrevPage);
   }
 }
 export default new searchProduct();

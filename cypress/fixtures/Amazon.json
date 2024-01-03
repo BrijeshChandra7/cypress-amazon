@@ -1,6 +1,8 @@
 {
   "Product1": "I phone 15",
   "Product2": "Pixel",
+  "Product3": "Pixel6",
+  "Product4": "Pixel 6a ^$^",
   "email": "hello@cypress.io",
   "body": "Fixtures are a great way to mock data for responses to routes"
 }

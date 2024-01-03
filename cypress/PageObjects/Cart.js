@@ -10,6 +10,9 @@ class cart {
   txtGift = ".a-alert-content > :nth-child(1) > b";
   btnDelete = 'span[data-csa-c-type="widget"] input[value="Delete"]';
   txtEmptyCartText = ".a-row > .a-spacing-mini";
+  checkBoxGift = "input#gift-wrap";
+  checkBoxGiftCart = 'input[type="checkbox"]';
+  optionsInCart = "div.a-row.sc-action-links";
 
   CartIconVisibility() {
     cy.get(this.IconCart).should("be.visible");
@@ -67,6 +70,25 @@ class cart {
 
   verifyEmptyCartText(text) {
     cy.verifyElementText(this.txtEmptyCartText, text);
+  }
+
+  checkAsGift() {
+    cy.assertElementVisibility(this.checkBoxGift);
+    cy.get(this.checkBoxGift).check();
+  }
+
+  verifyAsGift() {
+    cy.assertElementVisibility(this.checkBoxGiftCart);
+    cy.get(this.checkBoxGiftCart).first().should("be.checked");
+  }
+
+  verifyOptionsInCart(text) {
+    cy.get(this.optionsInCart).should("contain.text", text);
+    cy.get(this.optionsInCart)
+      .invoke("text")
+      .then((textReceived) => {
+        console.log(textReceived);
+      });
   }
 }
 export default new cart();
