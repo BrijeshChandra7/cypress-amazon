@@ -321,7 +321,7 @@ describe("Amazon", () => {
     });
   });
 
-  it.only("Verify that there should be navigation button(Previous) for navigation to pages.", () => {
+  it("Verify that there should be navigation button(Previous) for navigation to pages.", () => {
     cy.get("@Data").then((data) => {
       Cart.CartIconVisibility();
       SearchProduct.enterProduct(data.Product2);
@@ -331,6 +331,18 @@ describe("Amazon", () => {
       SearchProduct.verifyToatalSearchPages("17-32");
       SearchProduct.clickOnPrevPage();
       SearchProduct.verifyToatalSearchPages("1-16");
+    });
+  });
+
+  it.only("Verify that user should be perform search in different categories for example, Amazon Devices, Appliances etc.", () => {
+    cy.get("@Data").then((data) => {
+      Cart.CartIconVisibility();
+      SearchProduct.selectCategories("Amazon Devices");
+      SearchProduct.enterProduct(data.Product1);
+      SearchProduct.clickOnSearch();
+      SearchProduct.selectCategories("Appliances");
+      SearchProduct.enterProduct(data.Product5);
+      SearchProduct.clickOnSearch();
     });
   });
 });

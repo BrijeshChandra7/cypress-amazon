@@ -17,6 +17,7 @@ class searchProduct {
     "div.a-section.a-spacing-small.a-spacing-top-small span";
   btnNextPage = 'a[aria-label*="Go to next page"]';
   btnPrevPage = 'a[aria-label*="Go to previous page"]';
+  DropCategories = "select#searchDropdownBox";
 
   enterProduct(product) {
     cy.assertElementVisibility(this.txtBoxSearchProd);
@@ -106,6 +107,12 @@ class searchProduct {
   clickOnPrevPage() {
     cy.assertElementVisibility(this.btnPrevPage);
     cy.clickElement(this.btnPrevPage);
+  }
+
+  selectCategories(category) {
+    //cy.assertElementVisibility(this.DropCategories);
+    cy.get(this.DropCategories).children().should("contain.text", category);
+    cy.get(this.DropCategories).select(category, { force: true });
   }
 }
 export default new searchProduct();
